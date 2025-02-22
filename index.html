@@ -14,36 +14,51 @@
 
     body {
       font-family: 'Arial', sans-serif;
-      background-color: #f4f4f9;
-      color: #333;
+      background: linear-gradient(135deg, #007bff, #00bfff);
+      color: #fff;
       line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     /* Header */
     header {
-      background: #007bff;
-      color: #fff;
-      padding: 20px 0;
       text-align: center;
+      margin-bottom: 30px;
     }
 
     header h1 {
-      font-size: 2.5rem;
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      animation: fadeIn 2.5s ease-in-out;
     }
 
     /* Main Container */
     .container {
       max-width: 800px;
+      width: 90%;
       margin: 20px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      animation: slideUp 1.5s ease-in-out;
     }
 
     /* Upload Section */
     .upload-section {
-      text-align: center;
       margin-bottom: 30px;
     }
 
@@ -53,16 +68,24 @@
 
     .upload-section label {
       display: inline-block;
-      background: #007bff;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 5px;
+      background: #fff;
+      color: #007bff;
+      padding: 15px 30px;
+      border-radius: 50px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      font-size: 1.1rem;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
     .upload-section label:hover {
-      background: #0056b3;
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .upload-section label i {
+      margin-right: 10px;
     }
 
     /* Compression Options */
@@ -71,17 +94,40 @@
     }
 
     .options h2 {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
     }
 
     .options label {
       display: block;
       margin-bottom: 10px;
+      font-size: 1.1rem;
     }
 
     .options input[type="range"] {
       width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 10px;
+      background: #fff;
+      border-radius: 5px;
+      outline: none;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .options input[type="range"]:hover {
+      opacity: 1;
+    }
+
+    .options input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: #007bff;
+      border-radius: 50%;
+      cursor: pointer;
     }
 
     /* Compress Button */
@@ -92,42 +138,73 @@
     .compress-btn button {
       background: #28a745;
       color: #fff;
-      padding: 10px 20px;
+      padding: 15px 30px;
       border: none;
-      border-radius: 5px;
+      border-radius: 50px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      font-size: 1.1rem;
+      font-weight: bold;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
     .compress-btn button:hover {
-      background: #218838;
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     }
 
     /* Footer */
     footer {
       text-align: center;
       margin-top: 30px;
-      padding: 10px 0;
-      background: #007bff;
-      color: #fff;
+      padding: 20px 0;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     /* Responsive Design */
     @media (max-width: 768px) {
       header h1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
+      }
+
+      header p {
+        font-size: 1rem;
       }
 
       .container {
-        padding: 15px;
+        padding: 20px;
       }
 
       .upload-section label {
-        padding: 8px 16px;
+        padding: 12px 25px;
+        font-size: 1rem;
       }
 
       .compress-btn button {
-        padding: 8px 16px;
+        padding: 12px 25px;
+        font-size: 1rem;
       }
     }
   </style>
@@ -135,12 +212,15 @@
 <body>
   <header>
     <h1>Video Compressor</h1>
+    <p>Compress your videos quickly and easily!</p>
   </header>
 
   <div class="container">
     <div class="upload-section">
       <h2>Upload Your Video</h2>
-      <label for="video-upload">Choose File</label>
+      <label for="video-upload">
+        <i class="fas fa-upload"></i> Choose File
+      </label>
       <input type="file" id="video-upload" accept="video/*">
     </div>
 
